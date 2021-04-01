@@ -5,11 +5,10 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav mr-auto">
-        <%= link_to "Home", root_path, class: "nav-link" %>
         <% if current_user %>
-          <%= link_to edit_user_registration_path, class:"nav-link" do %>
-            <%= fa_icon 'user' %>
-            <%= truncate(current_user.email, length: 25).html_safe %>
+          <%= link_to new_user_invitation_path, class: "btn btn-primary" do %>
+            <%= fa_icon 'users' %>
+            Add members
           <% end %>
         <% end %>
       </div>
@@ -17,7 +16,11 @@
         <% unless current_user %>
           <%= link_to "Sign in", new_user_session_path, class: "btn btn-primary" %>
         <% else %>
-          <%= link_to "Log out", destroy_user_session_path, class: "btn btn-primary", method: :delete %>
+          <%= link_to edit_user_registration_path, class:"nav-link" do %>
+            <%= fa_icon 'user' %>
+            <%= truncate(current_user.email, length: 25).html_safe %>
+          <% end %>
+          <%= link_to "Log out", destroy_user_session_path, class: "btn btn-danger", method: :delete %>
         <% end %>
       </div>
     </div>
