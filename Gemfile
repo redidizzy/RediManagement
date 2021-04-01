@@ -28,6 +28,8 @@ gem 'devise'
 gem 'devise-bootstrap-views', '~> 1.0'
 gem "font-awesome-rails"
 gem 'acts_as_tenant'
+gem 'devise_invitable', '~> 2.0.0'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 

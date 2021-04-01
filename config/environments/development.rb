@@ -84,7 +84,7 @@ Rails.application.configure do
     :enable_starttls_auto => true
   }
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options ={:host => 'http://localhost:3000'}
+  config.action_mailer.default_url_options ={:host => 'lvh.me:3000'}
   config.hosts << "lvh.me"
   config.hosts << "*.lvh.me"
 
