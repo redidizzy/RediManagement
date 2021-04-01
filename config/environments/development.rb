@@ -85,4 +85,8 @@ Rails.application.configure do
   }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options ={:host => 'http://localhost:3000'}
+  config.hosts << "lvh.me"
+  config.hosts << "*.lvh.me"
+
+  config.main_host = "lvh.me:3000"
 end

@@ -9,9 +9,11 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  
   <body>
-    <div class="container py-4">
+    <%= render 'layouts/navigation' %>
+    <div class="container-fluid py-4">
+      <%= render 'layouts/messages' %>
       <%= yield %>
     </div>
   </body>

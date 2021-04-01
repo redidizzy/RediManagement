@@ -22,6 +22,20 @@
     <%= f.password_field :password_confirmation, autocomplete: 'current-password', class: 'form-control' %>
   </div>
 
+  <%= fields_for :tenant do |tenant| %>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <%= tenant.label :name, 'Organization' %>
+        <span class="description">(Unique name for your organization)</span>
+        <%= tenant.text_field :name, required: true, class: "form-control" %>
+      </div>
+      <div class="form-group col-md-6">
+        <%= tenant.label :plan %>
+        <%= tenant.select :plan, options_for_select(Plan.options, params[:plan]), {}, required: true, class: "form-control" %>
+      </div>
+    </div>
+  <% end %>
+
   <div class="form-group">
     <%= f.submit t('.sign_up'), class: 'btn btn-primary' %>
   </div>
