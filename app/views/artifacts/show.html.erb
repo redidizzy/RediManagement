@@ -1,0 +1,11 @@
+<p>
+  <strong>Name:</strong>
+  <%= @artifact.name %>
+</p>
+
+<p>
+  <strong>File:</strong>
+  <%= link_to "Download", rails_blob_path(@artifact.file, disposition: "attachment") %>
+</p>
+
+<%= link_to 'Back', artifacts_path(@artifact.project) %>

@@ -1,0 +1,38 @@
+
+<h1>Artifacts</h1>
+
+<% if @artifacts.count > 0 %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">File</th>
+        <th scope="col">Project</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @artifacts.each do |artifact| %>
+        <tr>
+          <td scope="row"><%= link_to artifact.name, artifact, class: 'main-link'%></td>
+          <td><%= link_to "Download", rails_blob_path(artifact.file, disposition: "attachment")  %></td>
+          <td>
+                <%= link_to artifact, class: "btn btn-primary" do %>
+                  <%= fa_icon 'eye' %>
+                <% end %>
+                <%= link_to artifact, class: "btn btn-danger", method: :delete,  data: { confirm: 'Are you sure?' } do %>
+                  <%= fa_icon 'trash' %>
+                <% end %>
+              </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="lead">There is currently no artifact for this project</p>
+<% end %>
+
+<br>
+
+<%= link_to 'New Artifact', new_artifact_path, class: "btn btn-success" %>
