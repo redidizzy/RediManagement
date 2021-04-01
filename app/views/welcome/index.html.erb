@@ -1,10 +1,6 @@
 <% if current_user %>
-  <h3>Organization: <%= ActsAsTenant.current_tenant.name %></h3>
-  <ul>
-    <% User.all.each do |user| %>
-      <li><%= user.email %></li>
-    <% end %>
-  </ul>
+  <h3 class="pull-right">Organization: <%= ActsAsTenant.current_tenant.name %></h3>
+  <%= render 'projects/list' %>
 <% else %>
   <div class="jumbotron">
     <h2>Welcome to Redi management SaaS app</h2>

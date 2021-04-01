@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_01_120022) do
+ActiveRecord::Schema.define(version: 2021_04_01_145716) do
+
+  create_table "projects", force: :cascade do |t|
+    t.string "title"
+    t.string "details"
+    t.date "expected_completion_date"
+    t.integer "tenant_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tenant_id"], name: "index_projects_on_tenant_id"
+  end
 
   create_table "tenants", force: :cascade do |t|
     t.string "name"
@@ -49,5 +59,6 @@ ActiveRecord::Schema.define(version: 2021_04_01_120022) do
     t.index ["tenant_id"], name: "index_users_on_tenant_id"
   end
 
+  add_foreign_key "projects", "tenants"
   add_foreign_key "users", "tenants"
 end

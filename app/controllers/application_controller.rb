@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :redirect_to_subdomain, if: !:devise_controller?
 
+  helper_method :current_tenant
+
   # def after_sign_in_path_for(resource)
    
   # end
@@ -20,5 +22,9 @@ class ApplicationController < ActionController::Base
   end
   def redirect_to_subdomain
     redirect_to subdomain_path_helper(request.path) if !check_if_correct_subdomain?
+  end
+
+  def current_tenant
+    ActsAsTenant.current_tenant
   end
 end

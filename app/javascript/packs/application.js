@@ -13,3 +13,8 @@ Turbolinks.start()
 ActiveStorage.start()
 
 import "bootstrap"
+import "flatpickr"
+
+$(document).on("turbolinks:load", () => {
+  flatpickr(".flatpickr")
+})
