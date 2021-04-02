@@ -129,4 +129,5 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options ={:host => 'redi-management.herokuapp.com', :protocol => 'https'}
   config.main_host = "redi-management.herokuapp.com"
+  config.session_store :cookie_store, key: '_application_devise_session', domain: :all, tld_length: 3
 end

@@ -89,4 +89,5 @@ Rails.application.configure do
   config.hosts << "*.lvh.me"
 
   config.main_host = "lvh.me:3000"
+  config.session_store :cookie_store, key: '_application_devise_session', domain: :all, tld_length: 2
 end
