@@ -20,14 +20,18 @@
               <%= link_to project, class: "btn btn-primary" do %>
                 <%= fa_icon 'eye' %>
               <% end %>
-              <%= link_to edit_project_path(project), class: "btn btn-warning" do %>
-                <%= fa_icon 'edit' %>
+              <% if current_user.is_admin? %>
+                <%= link_to edit_project_path(project), class: "btn btn-warning" do %>
+                  <%= fa_icon 'edit' %>
+                <% end %>
               <% end %>
               <%= link_to project_users_path(project), class: "btn btn-secondary" do %>
                 <%= fa_icon 'users' %>
               <% end %>
-              <%= link_to project, class: "btn btn-danger", method: :delete,  data: { confirm: 'Are you sure?' } do %>
-                <%= fa_icon 'trash' %>
+              <% if current_user.is_admin? %>
+                <%= link_to project, class: "btn btn-danger", method: :delete,  data: { confirm: 'Are you sure?' } do %>
+                  <%= fa_icon 'trash' %>
+                <% end %>
               <% end %>
             </td>
           </tr>

@@ -27,4 +27,12 @@ class ApplicationController < ActionController::Base
   def current_tenant
     ActsAsTenant.current_tenant
   end
+
+  def verify_if_admin
+    unless current_user.is_admin?
+      flash[:alert] = "You do not have the permission to do this"
+      redirect_to root_path
+    end
+  end
+
 end

@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [ :show, :edit, :update, :destroy, :users, :add_user ]
-
+  before_action :verify_if_admin, only: [ :edit, :update, :delete ]
 
   # GET /projects or /projects.json
   def index    

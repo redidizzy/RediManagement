@@ -17,7 +17,7 @@ class TenantsController < ApplicationController
               @payment.save
               
             rescue Exception => e 
-              flash[:error] = e.message 
+              flash[:alert] = e.message 
               @payment.destroy
               @tenant.plan = 'free'
               @tenant.save
@@ -42,10 +42,4 @@ class TenantsController < ApplicationController
     params.require(:tenant).permit(:name, :plan)
   end
 
-  def verify_if_admin
-    unless current_user.is_admin?
-      flash[:alert] = "You do not have the permission to do this"
-      redirect_to root_path
-    end
-  end
 end
