@@ -12,7 +12,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     tenant = Tenant.new(sign_up_tenant_params.merge(subdomain: sign_up_tenant_params[:name].parameterize))
-    byebug
     if(tenant.plan == 'premium') 
       @payment = Payment.new ({ email: sign_up_params[:email], token: params[:payment][:token] })
       flash[:alert] = "Please check registration errors." unless @payment.valid?
