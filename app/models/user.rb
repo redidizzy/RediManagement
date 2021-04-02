@@ -6,4 +6,6 @@ class User < ApplicationRecord
   after_create :skip_confirmation_notification!, unless: Proc.new { self.invitation_token.nil? }
   acts_as_tenant :tenant
   belongs_to :tenant
+  has_many :user_projects
+  has_many :projects, through: :user_projects
 end

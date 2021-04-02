@@ -1,0 +1,49 @@
+<div class="page-header">
+  <h3>Users for Project <%= @project.title %></h3>
+  <strong>(Other than yourself)</strong>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @project_users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td>
+          <% if !user.is_admin? %>
+            <%= link_to "Remove", user_project_path(id: user.user_projects.find_by(project_id: @project.id)), method: :delete, data: { confirm: "Are you sure ?" }, class: "btn btn-danger" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="page-header">
+  <h3>Users to be added for the project <%= @project.title %></h3>
+  <strong>(Admins don't need to be added)</strong>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @other_users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td>
+          <%= link_to "Add user", project_users_add_path(id: @project.id, user_id: user.id), method: :post, class: "btn btn-success" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

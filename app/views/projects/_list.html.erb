@@ -23,6 +23,9 @@
               <%= link_to edit_project_path(project), class: "btn btn-warning" do %>
                 <%= fa_icon 'edit' %>
               <% end %>
+              <%= link_to project_users_path(project), class: "btn btn-secondary" do %>
+                <%= fa_icon 'users' %>
+              <% end %>
               <%= link_to project, class: "btn btn-danger", method: :delete,  data: { confirm: 'Are you sure?' } do %>
                 <%= fa_icon 'trash' %>
               <% end %>
@@ -32,7 +35,7 @@
       </tbody>
     </table>
   <% else %>
-    <p class="lead">You don't have any project yet !</p>\
+    <p class="lead">You don't have any project yet !</p>
   <% end %>
 
 

@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     byebug
     if(tenant.plan == 'premium') 
       @payment = Payment.new ({ email: sign_up_params[:email], token: params[:payment][:token] })
-      flash[:error] = "Please check registration errors." unless @payment.valid?
+      flash[:alert] = "Please check registration errors." unless @payment.valid?
 
       begin 
         @payment.process_payment
@@ -23,7 +23,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         tenant.payment = @payment 
         tenant.save
       rescue Exception => e 
-        flash[:error] = e.message
+        flash[:alert] = e.message
         tenant.destroy
         puts "Payment failed"
         redirect_to new_user_registration_path and return

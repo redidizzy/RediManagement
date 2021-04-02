@@ -2,7 +2,7 @@ class WelcomeController < ApplicationController
 
   skip_before_action :authenticate_user!, only: [:index] 
 
-  def index
-    @projects = Project.all if(current_user )
+  def index    
+      @projects = current_user.projects if current_user 
   end
 end

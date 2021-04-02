@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_02_133524) do
+ActiveRecord::Schema.define(version: 2021_04_02_140353) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -78,6 +78,15 @@ ActiveRecord::Schema.define(version: 2021_04_02_133524) do
     t.string "plan"
   end
 
+  create_table "user_projects", force: :cascade do |t|
+    t.integer "project_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_user_projects_on_project_id"
+    t.index ["user_id"], name: "index_user_projects_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -114,5 +123,7 @@ ActiveRecord::Schema.define(version: 2021_04_02_133524) do
   add_foreign_key "artifacts", "tenants"
   add_foreign_key "payments", "tenants"
   add_foreign_key "projects", "tenants"
+  add_foreign_key "user_projects", "projects"
+  add_foreign_key "user_projects", "users"
   add_foreign_key "users", "tenants"
 end

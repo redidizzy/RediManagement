@@ -1,6 +1,7 @@
 class TenantsController < ApplicationController 
 
   before_action :set_tenant
+  before_action :verify_if_admin
 
   def edit
   end
@@ -39,5 +40,12 @@ class TenantsController < ApplicationController
 
   def tenant_params 
     params.require(:tenant).permit(:name, :plan)
+  end
+
+  def verify_if_admin
+    unless current_user.is_admin?
+      flash[:alert] = "You do not have the permission to do this"
+      redirect_to root_path
+    end
   end
 end

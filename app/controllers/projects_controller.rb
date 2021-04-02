@@ -1,10 +1,10 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ show edit update destroy ]
+  before_action :set_project, only: [ :show, :edit, :update, :destroy, :users, :add_user ]
 
 
   # GET /projects or /projects.json
-  def index
-    @projects = Project.all
+  def index    
+    @projects = current_user.projects
   end
 
   # GET /projects/1 or /projects/1.json
@@ -24,7 +24,7 @@ class ProjectsController < ApplicationController
   # POST /projects or /projects.json
   def create
     @project = Project.new(project_params)
-
+    @project.users << current_user
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: "Project was successfully created." }
@@ -55,6 +55,23 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to projects_url, notice: "Project was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def users 
+    @project_users = @project.users - [current_user]
+    @other_users = User.all - @project.users
+  end
+
+  def add_user 
+    @project_user = UserProject.new(user_id: params[:user_id], project_id: @project.id)
+    respond_to do |format|
+      if @project_user.save
+        format.html { redirect_to project_users_path(id: @project), notice: "User was added to the project successfully."}
+      else
+        format.html { redirect_to project_users_path(id: @project), error: "User was not added to the project." }
+      end
+
     end
   end
 
