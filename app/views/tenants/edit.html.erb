@@ -11,6 +11,10 @@
       <span class="description">(Unique name for your organization)</span>
       <%= f.text_field :name, required: true, class: "form-control" %>
     </div>
+    <div class="form-group col-md-6">
+      <%= f.label :plan %>
+      <%= f.select :plan, options_for_select(Plan.options, @tenant.plan), {}, required: true, class:"form-control" %>
+    </div>
   </div>
   <% if @tenant.payment.blank? %>
     <%= fields_for :payment do |p| %>

@@ -11,6 +11,7 @@ function getURLParameter(parameterName) {
 }
 
 $(() => {
+  $("#tenant_plan").trigger("change")
   let showError, stripeResponseHandler, submitHandler, handlePlanChange
   // Function to get params from url
   
