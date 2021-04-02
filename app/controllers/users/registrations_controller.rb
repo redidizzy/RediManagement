@@ -11,7 +11,27 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    tenant = Tenant.create(sign_up_tenant_params.merge(subdomain: sign_up_tenant_params[:name].parameterize))
+    tenant = Tenant.new(sign_up_tenant_params.merge(subdomain: sign_up_tenant_params[:name].parameterize))
+    byebug
+    if(tenant.plan == 'premium') 
+      @payment = Payment.new ({ email: sign_up_params[:email], token: params[:payment][:token] })
+      flash[:error] = "Please check registration errors." unless @payment.valid?
+
+      begin 
+        @payment.process_payment
+        @payment.save
+        tenant.payment = @payment 
+        tenant.save
+      rescue Exception => e 
+        flash[:error] = e.message
+        tenant.destroy
+        puts "Payment failed"
+        redirect_to new_user_registration_path and return
+      end
+    else 
+      tenant.save
+    end
+    
     build_resource(sign_up_params.merge(tenant: tenant))
     resource.save
     yield resource if block_given?
