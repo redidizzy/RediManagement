@@ -32,7 +32,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       tenant.save
     end
     
-    build_resource(sign_up_params.merge(tenant: tenant))
+    build_resource(sign_up_params.merge(tenant: tenant, is_admin: true))
     resource.save
     yield resource if block_given?
     if resource.persisted?

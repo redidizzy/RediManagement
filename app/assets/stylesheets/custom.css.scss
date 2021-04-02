@@ -82,3 +82,35 @@
   color: #5cb85c;
   
 }
+.fa.fa-rocket {
+
+  background: #fff;
+  
+  border: 1px solid white;
+  
+  border-radius: 20px;
+  
+  color: red;
+  
+  padding: 6px;
+  
+  }
+  
+  .logout {
+  
+  padding-left: 0;
+  
+  }
+  
+  .navbar.navbar-light.bg-light {
+  
+    background: #000 !important;
+    color: #fff !important;
+    padding-bottom: 5px;
+    .navbar-brand{
+      color: gray !important;
+    }
+    .nav-link{
+      color: white;
+    }
+  }
